@@ -104,8 +104,8 @@ Voltage Compensated kF: 18.327618446180555
 finalX: 56.50656807080862
 finalY: 0.4283812940183903
      */
-    public static double MAX_VEL = 90;
-    public static double MAX_ACCEL = 58.739336955377;
+    public static double MAX_VEL = 45; //90
+    public static double MAX_ACCEL = 45; //58.739336955377
     public static double MAX_ANG_VEL = Math.toRadians(180);
     public static double MAX_ANG_ACCEL = Math.toRadians(180);
 

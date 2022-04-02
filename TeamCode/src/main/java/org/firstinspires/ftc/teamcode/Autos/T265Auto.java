@@ -24,7 +24,7 @@ public class T265Auto extends LinearOpMode {
                 .build();
 
         robot.followTrajectorySequence(trajectorySequence0);
-        telemetry.addData("what i think ", robot.getPoseEstimate());
+//        telemetry.addData("what i think ", robot.t265Localizer.currentPose);
         telemetry.addData("End ", robot.getPoseEstimate().minus(new Pose2d(24,24, Math.toRadians(90))));
         telemetry.update();
         sleep(20 * 1000);

@@ -14,6 +14,8 @@ import com.spartronics4915.lib.T265Camera;
 
 import org.firstinspires.ftc.teamcode.Drive.Robot;
 
+import java.util.Objects;
+
 @TeleOp(name="Test T265", group="Iterative Opmode")
 public class T265Test extends OpMode
 {
@@ -23,8 +25,6 @@ public class T265Test extends OpMode
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
 
     private Robot robot = null;
-
-    private int currentHeight = 0;
 
     @Override
     public void init() {
@@ -87,7 +87,6 @@ public class T265Test extends OpMode
         telemetry.addData("Rotation", rotation.getDegrees());
         telemetry.addData("Robot Pose Estimate - T265", robot.getPoseEstimate().minus(new Pose2d(translation.getX(), translation.getY(), rotation.getRadians())));
         telemetry.addData("T265 Confidence", slamra.getLastReceivedCameraUpdate().confidence.toString());
-        telemetry.addData("Arm", robot.arm.armLift.getCurrentPosition());
         telemetry.update();
     }
 
@@ -95,5 +94,4 @@ public class T265Test extends OpMode
     public void stop() {
         slamra.stop();
     }
-
 }

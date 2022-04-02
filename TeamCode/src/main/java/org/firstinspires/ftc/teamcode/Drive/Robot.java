@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Drive;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
@@ -28,10 +30,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.teamcode.Drive.Subsystems.Arm;
 import org.firstinspires.ftc.teamcode.Localizers.T265Localizer;
+import org.firstinspires.ftc.teamcode.Localizers.T265LocalizerTest;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequenceRunner;
@@ -74,7 +78,7 @@ public class Robot extends TankDrive {
     private final List<DcMotorEx> motors;
     private final List<DcMotorEx> leftMotors;
     private final List<DcMotorEx> rightMotors;
-    public Arm arm = null;
+    public Arm arm;
     public final BNO055IMU imu;
     public BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -85,9 +89,9 @@ public class Robot extends TankDrive {
     private String backLeftName = "backLeft";
     private String backRightName = "backRight";
 
-    public T265Localizer t265Localizer = null;
+    public T265LocalizerTest t265Localizer = null;
 
-    public Robot(HardwareMap hardwareMap, Telemetry telemetry, String op) {
+    public Robot(HardwareMap hardwareMap, Telemetry telemetry, String opModeType) {
         super(kV, kA, kStatic, TRACK_WIDTH);
 
         follower = new TankPIDVAFollower(AXIAL_PID, CROSS_TRACK_PID,
@@ -149,12 +153,13 @@ public class Robot extends TankDrive {
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
-        if (!op.equals("teleop")) {
-            t265Localizer = new T265Localizer(hardwareMap);
-            setLocalizer(t265Localizer);
-            telemetry.addData("T265 Localizer", "Initialized");
-            telemetry.update();
-        }
+
+//        if (!opModeType.equals("teleop")) {
+//            t265Localizer = new T265LocalizerTest(hardwareMap);
+//            setLocalizer(t265Localizer);
+//            telemetry.addData("T265 Localizer", "Initialized");
+//            telemetry.update();
+//        }
 
         trajectorySequenceRunner = new TrajectorySequenceRunner(follower, HEADING_PID);
         telemetry.addData("Robot", "Initialized");
